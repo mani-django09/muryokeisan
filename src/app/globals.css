@@ -1,0 +1,337 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900;
+    font-family: var(--font-noto-sans-jp), var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: "palt" 1; /* Japanese proportional spacing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-noto-sans-jp), var(--font-inter), sans-serif;
+    @apply font-bold;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+  
+  p {
+    @apply leading-relaxed;
+    line-height: 1.8; /* Better for Japanese text */
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition-all duration-300 shadow-sm hover:shadow-md;
+  }
+  
+  /* Cards */
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-6 hover:shadow-2xl transition-all duration-300 border border-gray-100;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-md p-6 hover:shadow-xl transition-all duration-300 border border-blue-100;
+  }
+  
+  /* Input Fields */
+  .input-field {
+    @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 text-base;
+  }
+  
+  .input-field:focus {
+    @apply outline-none;
+  }
+  
+  /* Result Display */
+  .result-card {
+    @apply p-8 rounded-2xl text-white text-center animate-slide-up shadow-2xl;
+  }
+  
+  .result-value {
+    @apply text-5xl md:text-6xl font-bold mb-2;
+  }
+  
+  .result-label {
+    @apply text-lg opacity-90;
+  }
+  
+  /* Section Containers */
+  .section-container {
+    @apply container mx-auto px-4 py-16 md:py-24;
+  }
+  
+  .content-container {
+    @apply max-w-4xl mx-auto;
+  }
+  
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold;
+  }
+  
+  .badge-primary {
+    @apply bg-blue-100 text-blue-700;
+  }
+  
+  .badge-success {
+    @apply bg-green-100 text-green-700;
+  }
+  
+  .badge-warning {
+    @apply bg-orange-100 text-orange-700;
+  }
+  
+  /* Prose (Content) */
+  .prose {
+    @apply text-gray-700;
+  }
+  
+  .prose h2 {
+    @apply text-3xl font-bold text-gray-900 mt-12 mb-6;
+  }
+  
+  .prose h3 {
+    @apply text-2xl font-bold text-gray-900 mt-8 mb-4;
+  }
+  
+  .prose p {
+    @apply mb-6 leading-relaxed text-lg;
+  }
+  
+  .prose ul {
+    @apply mb-6 space-y-2;
+  }
+  
+  .prose li {
+    @apply leading-relaxed;
+  }
+  
+  .prose a {
+    @apply text-blue-600 hover:text-blue-700 underline;
+  }
+  
+  /* FAQ Accordion */
+  .faq-item {
+    @apply bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100;
+  }
+  
+  .faq-question {
+    @apply text-lg font-bold text-gray-900 flex items-start gap-3;
+  }
+  
+  .faq-answer {
+    @apply text-gray-700 leading-relaxed mt-3;
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent;
+  }
+  
+  /* Glass Effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+}
+
+@layer utilities {
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .animate-slide-down {
+    animation: slideDown 0.5s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+  
+  .animate-bounce-in {
+    animation: bounceIn 0.6s ease-out;
+  }
+  
+  /* Keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Hover Effects */
+  .hover-lift {
+    @apply transition-transform duration-300;
+  }
+  
+  .hover-lift:hover {
+    @apply -translate-y-2;
+  }
+  
+  .hover-glow {
+    @apply transition-shadow duration-300;
+  }
+  
+  .hover-glow:hover {
+    @apply shadow-2xl;
+  }
+  
+  /* Gradient Backgrounds */
+  .bg-gradient-primary {
+    @apply bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600;
+  }
+  
+  .bg-gradient-success {
+    @apply bg-gradient-to-br from-green-400 to-emerald-500;
+  }
+  
+  .bg-gradient-warning {
+    @apply bg-gradient-to-br from-orange-400 to-pink-500;
+  }
+  
+  .bg-gradient-info {
+    @apply bg-gradient-to-br from-cyan-400 to-blue-500;
+  }
+  
+  /* Text Shadows */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Smooth Scrolling */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-full hover:bg-gray-500;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    @apply bg-white;
+  }
+  
+  .card {
+    @apply shadow-none border border-gray-300;
+  }
+}
+
+/* Dark Mode Support (Future) */
+@media (prefers-color-scheme: dark) {
+  /* Add dark mode styles here if needed */
+}
+
+/* Accessibility */
+.focus-visible:focus {
+  @apply outline-none ring-4 ring-blue-500 ring-offset-2;
+}
+
+/* Loading States */
+.skeleton {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+.spinner {
+  @apply animate-spin rounded-full border-4 border-gray-200 border-t-blue-600;
+}
+
+/* Japanese Typography Enhancements */
+.jp-text {
+  font-feature-settings: "palt" 1, "pkna" 1;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+}
+
+.jp-heading {
+  font-feature-settings: "palt" 1;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}

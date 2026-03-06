@@ -1,0 +1,1759 @@
+/* ─────────────────────────────────────────────────────────────
+   CalculatorClient.module.css
+   Dark luxury × Japanese editorial aesthetic
+   CSS Modules: NO :root allowed — variables scoped to .wrap
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Card ── */
+.wrap {
+  font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+
+  /* CSS variables scoped here instead of :root */
+  --cc-bg:       #13131a;
+  --cc-surface:  #1a1a24;
+  --cc-border:   rgba(255, 255, 255, 0.08);
+  --cc-accent:   #e8624a;
+  --cc-accent2:  #f0a87a;
+  --cc-gold:     #c9a96e;
+  --cc-text:     #e8e4df;
+  --cc-muted:    #8a8680;
+  --cc-error:    #e87474;
+  --cc-success:  #7ec99a;
+  --cc-radius:   14px;
+}
+
+.card {
+  background: var(--cc-bg);
+  border: 1px solid var(--cc-border);
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 24px 64px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ── Form ── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Field ── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+}
+
+.label {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--cc-muted);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.labelReq {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5px;
+  height: 5px;
+  background: var(--cc-accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input,
+.select {
+  width: 100%;
+  background: var(--cc-surface);
+  border: 1px solid var(--cc-border);
+  border-radius: var(--cc-radius);
+  padding: 14px 20px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  color: var(--cc-text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: rgba(138, 134, 128, 0.45);
+  font-size: 14px;
+}
+
+.input:focus,
+.select:focus {
+  border-color: rgba(232, 98, 74, 0.5);
+  box-shadow: 0 0 0 3px rgba(232, 98, 74, 0.12);
+}
+
+.inputHasUnit {
+  padding-right: 56px;
+}
+
+.unit {
+  position: absolute;
+  right: 18px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--cc-gold);
+  pointer-events: none;
+}
+
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap::after {
+  content: '▾';
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cc-gold);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.select option {
+  background: #1a1a24;
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--cc-border);
+}
+
+/* ── Button ── */
+.btn {
+  position: relative;
+  width: 100%;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #e8624a, #c8432a);
+  border: none;
+  border-radius: var(--cc-radius);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(232, 98, 74, 0.35);
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(232, 98, 74, 0.45);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ── Spinner ── */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Arrow ── */
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* ── Error ── */
+.errorBox {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: rgba(232, 116, 116, 0.08);
+  border: 1px solid rgba(232, 116, 116, 0.25);
+  border-radius: var(--cc-radius);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.errorIcon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--cc-error);
+}
+
+.errorTitle {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--cc-error);
+  margin: 0 0 4px;
+  font-weight: 500;
+}
+
+.errorMsg {
+  font-size: 13px;
+  color: rgba(232, 116, 116, 0.75);
+  line-height: 1.6;
+  font-family: 'Noto Serif JP', serif;
+  margin: 0;
+}
+
+/* ── Result ── */
+.result {
+  margin-top: 28px;
+  border: 1px solid rgba(126, 201, 154, 0.2);
+  border-radius: 18px;
+  overflow: hidden;
+  animation: reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resultHeader {
+  background: rgba(126, 201, 154, 0.08);
+  border-bottom: 1px solid rgba(126, 201, 154, 0.15);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--cc-success);
+  text-transform: uppercase;
+}
+
+.resultDot {
+  width: 6px;
+  height: 6px;
+  background: var(--cc-success);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+.resultBody {
+  padding: 8px 0;
+}
+
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.resultRow:last-child {
+  border-bottom: none;
+}
+
+.resultKey {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--cc-muted);
+}
+
+.resultVal {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 32px;
+  color: #f5f2ee;
+  line-height: 1;
+}
+
+.resultValString {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--cc-success);
+  letter-spacing: 0.05em;
+}
+
+.resultUnit {
+  font-size: 14px;
+  color: var(--cc-gold);
+  margin-left: 6px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 24px 18px;
+  }
+  .resultVal {
+    font-size: 26px;
+  }
+}
+/* ═══════════════════════════════════════════════════════
+   PAGE-LEVEL STYLES (BMI page + shared page layout)
+   Added below existing CalculatorClient component styles
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Page shell ── */
+.page {
+  background: #0d0f1a;
+  color: #e8e4df;
+  min-height: 100vh;
+  font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+}
+
+/* ── Compact Hero ── */
+.heroBg {
+  background: linear-gradient(135deg, #0d1033 0%, #141a3a 50%, #0d0f1a 100%);
+  border-bottom: 1px solid rgba(201,169,110,0.12);
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 0 3.5rem;
+}
+
+.heroBg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 75% 50%, rgba(201,169,110,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(60,80,200,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Seigaiha pattern */
+.seigaihaPattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40'%3E%3Ccircle cx='30' cy='40' r='30' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3Ccircle cx='0' cy='40' r='30' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3Ccircle cx='60' cy='40' r='30' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3Ccircle cx='15' cy='20' r='30' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3Ccircle cx='45' cy='20' r='30' fill='none' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-size: 60px 40px;
+}
+
+.kamonDecoration {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border: 1px solid rgba(201,169,110,0.1);
+  border-radius: 50%;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.kamonDecoration::before {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border: 1px solid rgba(201,169,110,0.07);
+  border-radius: 50%;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.heroBreadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: rgba(201,169,110,0.45);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.heroBreadcrumb a {
+  color: rgba(201,169,110,0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.heroBreadcrumb a:hover { color: #c9a96e; }
+
+.heroBadges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.heroBadge {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(201,169,110,0.3);
+  color: #c9a96e;
+  background: rgba(201,169,110,0.06);
+}
+
+.heroBadgeGhost {
+  border-color: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.04);
+}
+
+.heroTitle {
+  font-family: 'Shippori Mincho B1', 'Noto Serif JP', serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 600;
+  color: #f5f0e8;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+
+.goldRule {
+  height: 1px;
+  background: linear-gradient(90deg, #c9a96e, rgba(201,169,110,0.2), transparent);
+  border: none;
+  margin: 1rem 0 1.25rem;
+  width: 80px;
+}
+
+.heroDesc {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(232,228,223,0.6);
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  max-width: 480px;
+}
+
+/* ── Ad band ── */
+.adSpace {
+  background: rgba(201,169,110,0.03);
+  border: 1px dashed rgba(201,169,110,0.12);
+  border-radius: 4px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ── Main two-column layout ── */
+.mainLayout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem clamp(1.25rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  align-items: stretch; /* KEY: equal height */
+}
+
+@media (max-width: 800px) {
+  .mainLayout { grid-template-columns: 1fr; }
+}
+
+/* ── Reference card (left) ── */
+.refCard {
+  background: #13131a;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.02),
+    0 20px 60px rgba(0,0,0,0.4);
+}
+
+.refCard::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.6), transparent);
+  flex-shrink: 0;
+}
+
+.refCardHead {
+  padding: 1.5rem 1.75rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.refCardAccent {
+  width: 3px;
+  height: 20px;
+  background: linear-gradient(180deg, #c9a96e, rgba(201,169,110,0.2));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.refCardTitle {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #e8e4df;
+  letter-spacing: 0.05em;
+}
+
+.refCardBody {
+  flex: 1;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.bmiRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.15s;
+  flex: 1;
+}
+
+.bmiRow:last-child { border-bottom: none; }
+.bmiRow:hover { background: rgba(255,255,255,0.015); }
+
+.bmiRowLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bmiDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bmiLabel {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: rgba(232,228,223,0.8);
+  letter-spacing: 0.04em;
+}
+
+.bmiRange {
+  font-family: 'Noto Sans JP', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+/* ── Calc card wrapper (right) ── */
+.calcCardOuter {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override CalculatorClient .card to remove its own padding/rounding
+   so the page-level wrapper controls shape */
+.calcCardOuter .card {
+  border-radius: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.calcCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1.5rem;
+}
+
+.iconBox {
+  width: 42px;
+  height: 42px;
+  background: rgba(201,169,110,0.1);
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.calcMeta {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: rgba(201,169,110,0.45);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.calcTitle {
+  font-family: 'Shippori Mincho B1', 'Noto Serif JP', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e8e4df;
+  letter-spacing: 0.06em;
+}
+
+.infoStrip {
+  background: rgba(201,169,110,0.04);
+  border-left: 2px solid rgba(201,169,110,0.35);
+  padding: 12px 16px;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  color: rgba(232,228,223,0.5);
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  border-radius: 0 4px 4px 0;
+}
+
+.infoStrip strong {
+  color: rgba(201,169,110,0.8);
+  font-weight: 400;
+}
+
+.footnote {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.7rem;
+  color: rgba(232,228,223,0.25);
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* ── Article / Knowledge section ── */
+.articleSection {
+  background: #f5f0e8;
+  border-top: 1px solid rgba(201,169,110,0.2);
+  padding: 5rem 0;
+}
+
+.articleInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.sectionKnowledge {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: #c9a96e;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.sectionH2 {
+  font-family: 'Shippori Mincho B1', 'Noto Serif JP', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: #1c1c28;
+  letter-spacing: 0.05em;
+  margin-bottom: 0;
+}
+
+.goldRuleDark {
+  height: 1px;
+  background: linear-gradient(90deg, #c9a96e, transparent);
+  border: none;
+  margin: 1.25rem 0 3rem;
+  width: 56px;
+}
+
+.articleGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem 4rem;
+}
+
+@media (max-width: 640px) {
+  .articleGrid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+.articleHeading {
+  font-family: 'Shippori Mincho B1', 'Noto Serif JP', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1f6e;
+  letter-spacing: 0.05em;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.articleHeading::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 32px; height: 1px;
+  background: #c9a96e;
+}
+
+.articleText {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #4a4a5e;
+  line-height: 2;
+  letter-spacing: 0.025em;
+}
+
+.articleText strong { color: #1a1f6e; font-weight: 500; }
+
+.timelineDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c9a96e;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(201,169,110,0.15);
+}
+
+.colSpanFull { grid-column: 1 / -1; }
+
+/* ── FAQ ── */
+.faqSection {
+  background: #0d0f1a;
+  border-top: 1px solid rgba(201,169,110,0.1);
+  padding: 5rem 0;
+}
+
+.faqInner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.faqItem {
+  border-bottom: 1px solid rgba(201,169,110,0.1);
+}
+
+.faqQuestion {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  color: #e8e4df;
+  padding: 1.4rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+}
+
+.faqQMark {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #c9a96e;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.faqAnswer {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  color: rgba(232,228,223,0.5);
+  line-height: 1.95;
+  font-size: 0.855rem;
+  padding: 0 0 1.5rem 40px;
+  letter-spacing: 0.025em;
+}
+
+/* ── Related ── */
+.relatedSection {
+  background: #111220;
+  border-top: 1px solid rgba(201,169,110,0.08);
+  padding: 4.5rem 0;
+}
+
+.relatedInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 640px) {
+  .relatedGrid { grid-template-columns: 1fr; }
+}
+
+.statChip {
+  background: #13131a;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.statChip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.5), transparent);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.statChip:hover {
+  border-color: rgba(201,169,110,0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+
+.statChip:hover::before { transform: scaleX(1); }
+
+/* ── Footer ── */
+.siteFooter {
+  background: #0d0f1a;
+  border-top: 1px solid rgba(201,169,110,0.07);
+  padding: 1.75rem clamp(1.25rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.footerText {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: rgba(201,169,110,0.2);
+  text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ── Animate in ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animateIn { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@media (max-width: 480px) {
+  .heroTitle { font-size: 1.75rem; }
+  .refCardHead { padding: 1.25rem; }
+  .bmiRow { padding: 0.85rem 1.25rem; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   AGE CALCULATOR — Reference panel styles
+   (reuses all shared hero/layout/faq/article classes)
+   ═══════════════════════════════════════════════════════ */
+
+/* Age milestone chips grid inside the ref card */
+.ageMilestoneGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  flex: 1;
+}
+
+.ageMilestone {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  border-right: 1px solid rgba(255,255,255,0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: background 0.15s;
+}
+
+.ageMilestone:hover { background: rgba(255,255,255,0.02); }
+
+/* Remove right border on even items (right column) */
+.ageMilestone:nth-child(2n) { border-right: none; }
+
+/* Remove bottom border on last two items */
+.ageMilestone:nth-last-child(-n+2) { border-bottom: none; }
+
+.ageMilestoneLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: rgba(201,169,110,0.5);
+  text-transform: uppercase;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.ageMilestoneValue {
+  font-family: 'Shippori Mincho B1', 'Noto Serif JP', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #e8e4df;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.ageMilestoneNote {
+  font-size: 0.62rem;
+  color: rgba(201,169,110,0.4);
+  letter-spacing: 0.08em;
+}
+
+/* Legal age law strip at bottom of ref card */
+.ageLawStrip {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  background: rgba(201,169,110,0.03);
+  flex-shrink: 0;
+}
+
+.ageLawStripText {
+  font-size: 0.72rem;
+  color: rgba(201,169,110,0.4);
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+}
+
+.ageLawStripText strong {
+  color: rgba(201,169,110,0.65);
+  font-weight: 400;
+}
+
+/* ── Calculator outer wrapper (no double-card) ── */
+/* Header + info strip sit ABOVE CalculatorClient's own .wrap/.card */
+.calcCardInner {
+  background: #13131a;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  padding: 2rem 2.5rem 1.5rem;
+}
+
+/* CalculatorClient's own .wrap sits flush below */
+.calcCardOuter > div + div {
+  /* nothing — let CalculatorClient's .card handle its own border-radius */
+}
+
+/* Override CalculatorClient card top radius when preceded by calcCardInner */
+.calcCardOuter .card {
+  border-radius: 0 0 20px 20px !important;
+  box-shadow: none;
+  border-top: none;
+}
+
+.calcCardFootnote {
+  background: #13131a;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-radius: 0 0 20px 20px;
+  padding: 1rem 2.5rem;
+  font-size: 0.7rem;
+  color: rgba(232,228,223,0.25);
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  font-family: 'Noto Serif JP', serif;
+  margin-top: -1px;
+}
+
+@media (max-width: 480px) {
+  .calcCardInner { padding: 1.5rem 1.5rem 1.25rem; }
+  .calcCardFootnote { padding: 0.875rem 1.5rem; }
+}
+
+/* ── Age page: single centred column layout ── */
+.calcSingleCol {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2.5rem clamp(1.25rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Reference card full-width below calculator */
+.calcSingleCol .refCard {
+  border-radius: 20px;
+}
+
+/* Milestone grid: 3 columns on desktop, 2 on mobile */
+.calcSingleCol .ageMilestoneGrid {
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0.25rem 0;
+}
+
+.calcSingleCol .ageMilestone:nth-child(2n) {
+  border-right: 1px solid rgba(255,255,255,0.03);
+}
+
+.calcSingleCol .ageMilestone:nth-child(3n) {
+  border-right: none;
+}
+
+.calcSingleCol .ageMilestone:nth-last-child(-n+3) {
+  border-bottom: none;
+}
+
+.calcSingleCol .ageMilestone:nth-last-child(-n+2) {
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+@media (max-width: 560px) {
+  .calcSingleCol .ageMilestoneGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .calcSingleCol .ageMilestone:nth-child(3n) {
+    border-right: 1px solid rgba(255,255,255,0.03);
+  }
+  .calcSingleCol .ageMilestone:nth-child(2n) {
+    border-right: none;
+  }
+  .calcSingleCol .ageMilestone:nth-last-child(-n+3) {
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .calcSingleCol .ageMilestone:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   BODY FAT PAGE — Reference table + formula block
+   ═══════════════════════════════════════════════════════ */
+
+/* Two reference tables side by side */
+.fatRefTables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .fatRefTables { grid-template-columns: 1fr; }
+}
+
+.fatRefTable {
+  background: #13131a;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.fatRefTable::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.5), transparent);
+}
+
+.fatRefTableHead {
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(201,169,110,0.8);
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fatRefTableHead::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  background: rgba(201,169,110,0.5);
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.fatRefRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.15s;
+}
+
+.fatRefRow:last-child { border-bottom: none; }
+.fatRefRow:hover { background: rgba(255,255,255,0.02); }
+
+.fatRefRowRange {
+  font-family: 'Noto Sans JP', monospace;
+  font-size: 0.78rem;
+  color: rgba(232,228,223,0.6);
+  letter-spacing: 0.03em;
+}
+
+.fatRefRowLabel {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* label colors are applied via inline style in page.tsx */
+
+/* Formula block inside article */
+.formulaBlock {
+  background: rgba(201,169,110,0.04);
+  border: 1px solid rgba(201,169,110,0.15);
+  border-left: 3px solid rgba(201,169,110,0.5);
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+}
+
+.formulaText {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #e8e4df;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+}
+
+.formulaNote {
+  font-size: 0.75rem;
+  color: rgba(201,169,110,0.6);
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════════════════
+   HOMEPAGE — specific styles
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Hero (homepage variant — taller than calc pages) ── */
+.homeHero {
+  background: linear-gradient(135deg, #0d1033 0%, #141a3a 50%, #0d0f1a 100%);
+  border-bottom: 1px solid rgba(201,169,110,0.12);
+  position: relative;
+  overflow: hidden;
+  padding: 2.75rem 0 3.25rem;
+}
+
+.homeHero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 75% 50%, rgba(201,169,110,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(60,80,200,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Single centred column — matches calculator page hero */
+.homeHeroInner {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem,4vw,3rem);
+}
+
+.homeEyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: rgba(201,169,110,0.4);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.homeEyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: rgba(201,169,110,0.3);
+  display: inline-block;
+}
+
+.homeHeroTitle {
+  font-family: 'Shippori Mincho B1','Noto Serif JP',serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: #f5f0e8;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  margin: 0 0 0.6rem;
+}
+
+.homeHeroAccent {
+  color: rgba(201,169,110,0.75);
+}
+
+/* Gold rule — reuses .goldRule from shared, added here for spacing context */
+
+.homeHeroDesc {
+  font-family: 'Noto Serif JP',serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: rgba(232,228,223,0.5);
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  margin: 0.75rem 0 1.5rem;
+}
+
+.homeHeroCta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.homeCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #e8624a, #c8432a);
+  color: #fff;
+  font-family: 'Noto Serif JP',serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  padding: 11px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(232,98,74,0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.homeCtaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232,98,74,0.42);
+}
+
+.homeCtaTrust {
+  font-size: 0.68rem;
+  color: rgba(201,169,110,0.3);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.homeCtaTrust::before {
+  content: '⚿';
+  font-size: 0.8rem;
+  color: rgba(76,175,125,0.55);
+}
+
+/* Stats row — compact horizontal strip below CTA */
+.homeStats {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.homeStatItem {}
+
+.homeStatValue {
+  font-family: 'Shippori Mincho B1','Noto Serif JP',serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #e8e4df;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+.homeStatLabel {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: rgba(201,169,110,0.35);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── Tool grid ── */
+.toolsSection {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3.5rem clamp(1.25rem,4vw,3rem);
+}
+
+.sectionEyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: rgba(201,169,110,0.45);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.sectionEyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: rgba(201,169,110,0.35);
+}
+
+.toolGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) { .toolGrid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 620px) { .toolGrid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 360px) { .toolGrid { grid-template-columns: 1fr; } }
+
+.toolCard {
+  background: #13131a;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-decoration: none;
+  position: relative;
+  transition: background 0.2s;
+  overflow: hidden;
+}
+
+.toolCard::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.5), transparent);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.toolCard:hover { background: #1a1a24; }
+.toolCard:hover::after { transform: scaleX(1); }
+
+.toolCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.toolIcon {
+  font-size: 1.3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.toolCatBadge {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid;
+  flex-shrink: 0;
+}
+
+.toolName {
+  font-family: 'Shippori Mincho B1','Noto Serif JP',serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e8e4df;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+.toolDesc {
+  font-size: 0.75rem;
+  color: rgba(232,228,223,0.35);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  flex: 1;
+}
+
+.toolArrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: rgba(201,169,110,0);
+  transition: color 0.2s;
+  text-transform: uppercase;
+}
+
+.toolCard:hover .toolArrow { color: rgba(201,169,110,0.5); }
+
+/* Category badge colours */
+.catHealth  { color: #4caf7d; border-color: rgba(76,175,125,0.25); background: rgba(76,175,125,0.06);  }
+.catTax     { color: #5b9bd5; border-color: rgba(91,155,213,0.25); background: rgba(91,155,213,0.06);  }
+.catFinance { color: #c9a96e; border-color: rgba(201,169,110,0.25);background: rgba(201,169,110,0.06); }
+.catDate    { color: #a78bda; border-color: rgba(167,139,218,0.25);background: rgba(167,139,218,0.06); }
+.catBasic   { color: rgba(232,228,223,0.5); border-color: rgba(232,228,223,0.12); background: rgba(232,228,223,0.04); }
+
+/* ── How it works ── */
+.howSection {
+  background: #111220;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 4.5rem 0;
+}
+
+.howInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem,4vw,3rem);
+}
+
+.howGrid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 640px) { .howGrid { grid-template-columns: 1fr; gap: 2rem; } }
+
+.howStep {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.howNum {
+  width: 36px;
+  height: 36px;
+  background: rgba(201,169,110,0.08);
+  border: 1px solid rgba(201,169,110,0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Sans JP',monospace;
+  font-size: 0.7rem;
+  color: rgba(201,169,110,0.7);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.howTitle {
+  font-family: 'Shippori Mincho B1','Noto Serif JP',serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e8e4df;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.howDesc {
+  font-size: 0.8rem;
+  color: rgba(232,228,223,0.4);
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+  font-family: 'Noto Serif JP',serif;
+  font-weight: 300;
+}
+
+/* ── About + Trust section ── */
+.aboutSection {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4.5rem clamp(1.25rem,4vw,3rem);
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .aboutSection { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+.aboutH2 {
+  font-family: 'Shippori Mincho B1','Noto Serif JP',serif;
+  font-size: clamp(1.4rem,2.5vw,1.9rem);
+  font-weight: 700;
+  color: #e8e4df;
+  letter-spacing: 0.05em;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.aboutText {
+  font-family: 'Noto Serif JP',serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: rgba(232,228,223,0.5);
+  line-height: 2;
+  letter-spacing: 0.025em;
+  margin-bottom: 1rem;
+}
+
+.audienceList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+.audienceItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.audienceItemDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(201,169,110,0.5);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.audienceItemTitle {
+  font-family: 'Shippori Mincho B1','Noto Serif JP',serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #e8e4df;
+}
+
+.audienceItemDesc {
+  font-size: 0.78rem;
+  color: rgba(232,228,223,0.4);
+  letter-spacing: 0.02em;
+}
+
+/* Trust sidebar */
+.trustCard {
+  background: #13131a;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.trustCard::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.5), transparent);
+}
+
+.trustCardHead {
+  padding: 1.25rem 1.5rem 1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: rgba(201,169,110,0.4);
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.trustItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.trustItem:last-child { border-bottom: none; }
+
+.trustItemIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.trustItemTitle {
+  font-family: 'Noto Serif JP',serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #e8e4df;
+  margin-bottom: 2px;
+}
+
+.trustItemSub {
+  font-size: 0.72rem;
+  color: rgba(232,228,223,0.35);
+  letter-spacing: 0.02em;
+}
+
+/* FAQ accordion */
+.homeFaqCard {
+  background: #13131a;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 1.25rem;
+}
+
+.homeFaqCard::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.5), transparent);
+}
+
+.homeFaqHead {
+  padding: 1.25rem 1.5rem 1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: rgba(201,169,110,0.4);
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.homeFaqItem {
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  padding: 1rem 1.5rem;
+}
+
+.homeFaqItem:last-child { border-bottom: none; }
+
+.homeFaqQ {
+  font-family: 'Noto Serif JP',serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(232,228,223,0.75);
+  line-height: 1.6;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.homeFaqA {
+  font-family: 'Noto Serif JP',serif;
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: rgba(232,228,223,0.35);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+/* ── Final CTA ── */
+.ctaStrip {
+  background: linear-gradient(135deg, #0d1033 0%, #141a3a 100%);
+  border-top: 1px solid rgba(201,169,110,0.1);
+  padding: 4rem 0;
+}
+
+.ctaStripInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem,4vw,3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.ctaStripEyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: rgba(201,169,110,0.35);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.ctaStripTitle {
+  font-family: 'Shippori Mincho B1','Noto Serif JP',serif;
+  font-size: clamp(1.4rem,3vw,2rem);
+  font-weight: 700;
+  color: #f5f0e8;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.ctaStripSub {
+  font-size: 0.82rem;
+  color: rgba(232,228,223,0.35);
+  margin-top: 6px;
+  letter-spacing: 0.04em;
+}

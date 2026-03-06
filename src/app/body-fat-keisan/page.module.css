@@ -1,0 +1,349 @@
+/* ─────────────────────────────────────────────────────────────
+   page.module.css  —  Body Fat Calculator (体脂肪率計算機)
+   Dark luxury × Japanese editorial aesthetic
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Page shell + Design tokens (scoped — :root not allowed in CSS Modules) ── */
+.page {
+  --bfp-bg:       #0d0d12;
+  --bfp-surface:  #13131a;
+  --bfp-surface2: #1a1a24;
+  --bfp-border:   rgba(255, 255, 255, 0.07);
+  --bfp-accent:   #e8624a;
+  --bfp-accent2:  #f0a87a;
+  --bfp-gold:     #c9a96e;
+  --bfp-text:     #e8e4df;
+  --bfp-muted:    #8a8680;
+  --bfp-white:    #f5f2ee;
+  --bfp-radius:   16px;
+
+  background: var(--bfp-bg);
+  color: var(--bfp-text);
+  font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  background: var(--bfp-surface);
+  padding: 80px 24px 100px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--bfp-border);
+}
+
+.heroNoise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.heroGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 2;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 18px;
+  background: rgba(232, 98, 74, 0.15);
+  border: 1px solid rgba(232, 98, 74, 0.35);
+  border-radius: 100px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--bfp-accent2);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.heroTitle {
+  font-family: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+  font-size: clamp(52px, 8vw, 88px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--bfp-white);
+  margin: 0 0 20px;
+}
+
+.heroTitleAccent {
+  color: var(--bfp-accent);
+  font-style: italic;
+  font-family: 'DM Serif Display', Georgia, serif;
+}
+
+.heroSub {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--bfp-muted);
+  line-height: 1.9;
+  margin-bottom: 32px;
+  letter-spacing: 0.05em;
+}
+
+.heroTags {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--bfp-gold);
+  letter-spacing: 0.1em;
+}
+
+.heroDeco {
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  opacity: 0.08;
+  color: var(--bfp-accent);
+  z-index: 1;
+}
+
+.hideSp {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 20px 80px;
+  }
+  .heroDeco {
+    display: none;
+  }
+  .hideSp {
+    display: none;
+  }
+}
+
+/* ── Ads ── */
+.ad {
+  max-width: 960px;
+  margin: 0 auto;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: var(--bfp-radius);
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--bfp-muted);
+  letter-spacing: 0.1em;
+}
+
+.adTop    { margin: 40px auto; }
+.adBottom { margin: 40px auto 60px; }
+
+/* ── Section label ── */
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--bfp-muted);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.sectionLabelLine {
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: var(--bfp-border);
+}
+
+.sectionTitle {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 300;
+  color: var(--bfp-white);
+  text-align: center;
+  margin: 0 0 40px;
+  letter-spacing: 0.08em;
+}
+
+/* ── Calc section ── */
+.calcSection {
+  padding: 0 24px 60px;
+}
+
+.calcSectionInner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ── Reference tables ── */
+.refSection {
+  background: var(--bfp-surface);
+  border-top: 1px solid var(--bfp-border);
+  border-bottom: 1px solid var(--bfp-border);
+  padding: 60px 24px;
+}
+
+.refSectionInner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.refTables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 540px) {
+  .refTables {
+    grid-template-columns: 1fr;
+  }
+}
+
+.refTable {
+  background: var(--bfp-surface2);
+  border: 1px solid var(--bfp-border);
+  border-radius: var(--bfp-radius);
+  overflow: hidden;
+}
+
+.refTableHeader {
+  background: rgba(232, 98, 74, 0.1);
+  border-bottom: 1px solid var(--bfp-border);
+  padding: 14px 20px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--bfp-accent2);
+}
+
+.refRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--bfp-border);
+  font-size: 13px;
+}
+
+.refRow:last-child {
+  border-bottom: none;
+}
+
+.refRowRange {
+  color: var(--bfp-muted);
+  font-feature-settings: 'tnum';
+}
+
+.refRowLabel {
+  font-weight: 500;
+}
+
+.refRowLow    .refRowLabel { color: #6ab0e0; }
+.refRowNormal .refRowLabel { color: #7ec99a; }
+.refRowWarn   .refRowLabel { color: #e8c074; }
+.refRowHigh   .refRowLabel { color: #e87474; }
+
+/* ── Article ── */
+.article {
+  padding: 80px 24px;
+}
+
+.articleInner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.articleBlock {
+  margin-bottom: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--bfp-border);
+}
+
+.articleBlock:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.articleH2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--bfp-white);
+  margin: 0 0 20px;
+  letter-spacing: 0.05em;
+  padding-left: 16px;
+  border-left: 2px solid var(--bfp-accent);
+}
+
+.article p {
+  font-size: 15px;
+  line-height: 2;
+  color: rgba(232, 228, 223, 0.75);
+  margin: 0 0 16px;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+.article p:last-child {
+  margin-bottom: 0;
+}
+
+.formula {
+  background: var(--bfp-surface);
+  border: 1px solid var(--bfp-border);
+  border-left: 3px solid var(--bfp-gold);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+
+.formula p {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.formula p:last-child {
+  margin: 0;
+}
+
+.formulaNote {
+  color: var(--bfp-muted) !important;
+  font-size: 12px !important;
+}
+
+.formula strong {
+  color: var(--bfp-gold);
+  font-weight: 400;
+}
+
+/* ── FAQ section ── */
+.faqSection {
+  background: var(--bfp-surface);
+  border-top: 1px solid var(--bfp-border);
+  padding: 80px 24px;
+}
+
+.faqSectionInner {
+  max-width: 720px;
+  margin: 0 auto;
+}
